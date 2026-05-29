@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Resume Screening & Candidate Ranking Web Application
 
 AI-powered full-stack web app that automatically screens resumes against a Job Description and ranks candidates by match score.
@@ -151,3 +152,6 @@ Open `http://localhost:5173`
 - OpenAI API key must have access to `gpt-4o-mini` model
 - PostgreSQL must have the `gen_random_uuid()` function (available in PG 13+)
 - Each resume file is capped at 5MB
+=======
+# Resume-Screener_Project
+>>>>>>> 5528871c7168ccc43bb2537af339b5eb4224ed02
