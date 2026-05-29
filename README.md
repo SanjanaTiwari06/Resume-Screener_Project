@@ -1,157 +1,128 @@
-<<<<<<< HEAD
 # Resume Screening & Candidate Ranking Web Application
 
-AI-powered full-stack web app that automatically screens resumes against a Job Description and ranks candidates by match score.
+## Overview
 
----
+Resume Screening & Candidate Ranking Web Application is a full-stack web application that automates the initial recruitment screening process. The system analyzes uploaded resumes against a given Job Description (JD), calculates a matching score, and ranks candidates from highest to lowest suitability.
 
-## Tech Stack
+## Live Demo
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18 + Vite |
-| Backend | Node.js + Express |
-| Database | PostgreSQL |
-| AI | OpenAI GPT-4o-mini |
-| Deployment | Render (backend) + Vercel (frontend) |
+Frontend:
+https://resume-screener-project.vercel.app
 
----
+Backend API:
+https://resume-screener-project-ad2o.onrender.com
 
-## Architecture Overview
+## GitHub Repository
 
-```
-┌─────────────────┐        ┌──────────────────────┐        ┌──────────────┐
-│  React Frontend │  HTTP  │  Express Backend      │  SQL   │  PostgreSQL  │
-│  (Vite)         │ ──────▶│  /api/jobs            │ ──────▶│  Database    │
-│  Port 5173      │        │  Port 5000            │        │              │
-└─────────────────┘        └──────────┬───────────┘        └──────────────┘
-                                       │ OpenAI API
-                                       ▼
-                              ┌─────────────────┐
-                              │  GPT-4o-mini    │
-                              │  Resume Scoring │
-                              └─────────────────┘
-```
+https://github.com/SanjanaTiwari06/Resume-Screener_Project
 
-### How Scoring Works
+## Features
 
-Each resume is parsed to plain text (PDF/DOC/DOCX) and sent to GPT-4o-mini along with the Job Description. The AI scores each candidate 0–100 based on:
+### Resume Upload
+- Upload single or multiple resumes
+- Supports PDF, DOC, and DOCX formats
 
-- **Skills match** — 40%
-- **Experience relevance** — 30%
-- **Education alignment** — 20%
-- **Keyword similarity** — 10%
+### Job Description Input
+- Enter Job Description manually
+- Analyze resumes against the provided JD
 
-Results are stored in PostgreSQL and returned ranked from highest to lowest.
+### Resume Screening & Scoring
+- Skill matching
+- Experience relevance analysis
+- Education alignment
+- Keyword similarity matching
+- Match score generation (0–100)
 
----
+### Candidate Ranking
+- Automatic ranking from highest to lowest score
 
-## Local Setup
+### Results Dashboard
+- Candidate Name
+- Match Score
+- Rank
+- Matching Skills
+- Missing Skills
+- Resume Preview
+- Search Candidates
+- Sort by Score
 
-### Prerequisites
-- Node.js 18+
-- PostgreSQL (running locally or on a cloud service like Supabase/Neon)
-- OpenAI API key
+## Technology Stack
 
-### 1. Clone the repo
-```bash
-git clone <your-repo-url>
-cd resume-screener
-```
+### Frontend
+- React.js
+- Vite
+- CSS3
 
-### 2. Setup Backend
-```bash
-cd backend
-npm install
-cp .env.example .env
-```
+### Backend
+- Node.js
+- Express.js
 
-Edit `.env`:
-```
-PORT=5000
-OPENAI_API_KEY=sk-...your-key-here...
-DATABASE_URL=postgresql://username:password@localhost:5432/resume_screener
-FRONTEND_URL=http://localhost:5173
-```
+### Database
+- MySQL
 
-Create the database:
-```bash
-psql -U postgres -c "CREATE DATABASE resume_screener;"
-```
+### Deployment
+- Vercel
+- Render
+- Railway
 
-Start backend:
-```bash
-npm run dev
-```
+## Project Architecture
 
-### 3. Setup Frontend
+Frontend (React)
+↓
+REST API (Express.js)
+↓
+Resume Parsing & Scoring Engine
+↓
+MySQL Database
+
+## Candidate Scoring Approach
+
+The system compares resumes with the Job Description using:
+- Skills Matching
+- Experience Relevance
+- Education Alignment
+- Keyword Similarity
+
+Candidates are assigned a score between 0–100 and ranked accordingly.
+
+## Installation
+
+### Frontend
+
 ```bash
 cd frontend
 npm install
-cp .env.example .env
-```
-
-Start frontend:
-```bash
 npm run dev
 ```
 
-Open `http://localhost:5173`
+### Backend
 
----
+```bash
+cd backend
+npm install
+npm start
+```
 
-## API Endpoints
+## Environment Variables
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/jobs` | Upload resumes + JD, run analysis |
-| GET | `/api/jobs` | List all past screenings |
-| GET | `/api/jobs/:id/candidates` | Get ranked candidates for a job |
-| DELETE | `/api/jobs/:id` | Delete a screening |
-| GET | `/health` | Health check |
+```env
+PORT=5000
+DB_HOST=your_host
+DB_PORT=3306
+DB_USER=your_user
+DB_PASSWORD=your_password
+DB_NAME=your_database
+FRONTEND_URL=http://localhost:5173
+```
 
-### POST `/api/jobs` — multipart/form-data
+## Future Enhancements
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| resumes | File[] | ✅ | Resume files (PDF/DOC/DOCX/TXT) |
-| jobDescription | string | ✅* | JD text (or upload jdFile) |
-| jdFile | File | ✅* | JD document upload |
-| jobTitle | string | ❌ | Optional job title |
+- AI-powered semantic matching
+- Email notifications
+- Advanced analytics
+- Authentication system
 
----
+## Author
 
-## Deployment
+Sanjana Tiwari
 
-### Backend → Render
-
-1. Push code to GitHub
-2. Create new **Web Service** on [render.com](https://render.com)
-3. Set root directory to `backend/`
-4. Build command: `npm install`
-5. Start command: `node server.js`
-6. Add environment variables:
-   - `OPENAI_API_KEY`
-   - `DATABASE_URL` (use Render PostgreSQL or Neon)
-   - `FRONTEND_URL` (your Vercel URL)
-   - `NODE_ENV=production`
-
-### Frontend → Vercel
-
-1. Create new project on [vercel.com](https://vercel.com)
-2. Set root directory to `frontend/`
-3. Add environment variable:
-   - `VITE_API_URL=https://your-render-backend.onrender.com/api`
-4. Deploy
-
----
-
-## Assumptions
-
-- Resumes must contain readable text (scanned image PDFs without OCR may not parse well)
-- OpenAI API key must have access to `gpt-4o-mini` model
-- PostgreSQL must have the `gen_random_uuid()` function (available in PG 13+)
-- Each resume file is capped at 5MB
-=======
-# Resume-Screener_Project
->>>>>>> 5528871c7168ccc43bb2537af339b5eb4224ed02
