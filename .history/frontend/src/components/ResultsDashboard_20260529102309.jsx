@@ -23,11 +23,12 @@ function CandidateCard({ candidate }) {
     <div className={`${styles.card} ${open ? styles.cardOpen : ''}`}>
       <div className={styles.cardTop} onClick={() => setOpen(o => !o)}>
         <div
-          className={`${styles.rankBadge} ${rank_no === 1 ? styles.rank1
-              : rank_no === 2 ? styles.rank2
-                : rank_no === 3 ? styles.rank3
-                  : styles.rankOther
-            }`}
+          className={`${styles.rankBadge} ${
+            rank_no === 1 ? styles.rank1
+            : rank_no === 2 ? styles.rank2
+            : rank_no === 3 ? styles.rank3
+            : styles.rankOther
+          }`}
         >
           {MEDAL[rank_no] || `#${rank_no}`}
         </div>
@@ -102,7 +103,7 @@ export default function ResultsDashboard({ data, onReset }) {
         return;
       }
       const res = await fetch(
-        `https://resume-screener-project-ad2o.onrender.com/api/jobs/${data.jobId}/candidates?search=${value}`
+        `http://localhost:5000/api/jobs/${data.jobId}/candidates?search=${value}`
       );
       const result = await res.json();
       setCandidates(Array.isArray(result) ? result : []);
