@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://resume-screener-project-ad2o.onrender.com/api'
+  baseURL: 'https://resume-screener-project-ad2.onrender.com/api'
 });
 
 export const analyzeResumes = (formData) =>
