@@ -1,0 +1,261 @@
+/* ── Dashboard Container ─────────────────────────────────── */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Stats Row ───────────────────────────────────────────── */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.statCard {
+ background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.statNum {
+  font-family: 'Syne', 'Georgia', serif;
+  font-size: 30px;
+  font-weight: 700;
+ color: var(--text-primary);
+  margin-bottom: 5px;
+  line-height: 1;
+}
+
+.statAccent { color: #7c6ff7; }
+.statGreen  { color: #4ade80; }
+.statName   { font-size: 16px; padding-top: 4px; color: #c4c2d4; }
+
+.statLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  font-weight: 500;
+}
+
+/* ── Toolbar ─────────────────────────────────────────────── */
+.toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+  align-items: center;
+}
+
+.search {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.search:focus { border-color: rgba(124, 111, 247, 0.5); }
+.search::placeholder { color: var(--text-muted); }
+
+.sortSelect {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: 10px;
+  padding: 10px 13px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+}
+
+.btnExport {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.btnExport:hover { background: rgba(255, 255, 255, 0.09); }
+
+.btnReset {
+  background: linear-gradient(135deg, #7c6ff7, #a78bfa);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+ color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.btnReset:hover { opacity: 0.85; }
+
+/* ── Candidate Cards ─────────────────────────────────────── */
+.list { display: flex; flex-direction: column; gap: 10px; }
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.18s, transform 0.15s;
+}
+
+.card:hover { border-color: rgba(124, 111, 247, 0.28); }
+.cardOpen   { border-color: rgba(124, 111, 247, 0.35); }
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  cursor: pointer;
+}
+
+.rankBadge {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.rank1    { background: rgba(234,179,8,0.14); color: #f59e0b; }
+.rank2    { background: rgba(148,163,184,0.14); color: #94a3b8; }
+.rank3    { background: rgba(180,83,9,0.14); color: #d97706; }
+.rankOther{ background: rgba(255,255,255,0.06); color: #5a5872; font-size: 13px; }
+
+.info { flex: 1; }
+
+.name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.filename { font-size: 12px;  color: var(--text-muted); }
+
+.scoreBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  min-width: 82px;
+}
+
+.scoreNum {
+  font-family: 'Syne', 'Georgia', serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.scoreHigh { color: #4ade80; }
+.scoreMid  { color: #fb923c; }
+.scoreLow  { color: #f87171; }
+
+.scoreMax  { font-size: 12px; opacity: 0.45; margin-left: 1px; }
+
+.barWrap {
+  width: 82px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.55s ease;
+}
+
+.chevron {
+  color: #4a4860;
+  font-size: 18px;
+  transition: transform 0.2s;
+  margin-left: 4px;
+  flex-shrink: 0;
+}
+
+/* ── Card Detail ─────────────────────────────────────────── */
+.detail {
+  padding: 0 20px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.summary {
+  font-size: 13.5px;
+ color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 15px 0 18px;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.skillLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+    color: var(--text-muted);
+  margin-bottom: 9px;
+  font-weight: 600;
+}
+
+.skillTags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.tagMatch {
+  background: rgba(74, 222, 128, 0.11);
+  color: #4ade80;
+  font-size: 12px;
+  padding: 4px 11px;
+  border-radius: 20px;
+  border: 1px solid rgba(74, 222, 128, 0.22);
+}
+
+.tagMissing {
+  background: rgba(248, 113, 113, 0.1);
+  color: #f87171;
+  font-size: 12px;
+  padding: 4px 11px;
+  border-radius: 20px;
+  border: 1px solid rgba(248, 113, 113, 0.2);
+}
+
+.none { font-size: 12px; color: #4a4860; font-style: italic; }
+
+/* ── Empty State ─────────────────────────────────────────── */
+.empty {
+  text-align: center;
+  color: #4a4860;
+  padding: 40px;
+  font-size: 14px;
+}
