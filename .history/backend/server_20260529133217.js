@@ -8,25 +8,6 @@ const jobsRouter = require('./routes/jobs');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// routes, middleware etc...
-
-(async () => {
-  try {
-    console.log("Starting server...");
-    
-    await initDB();
-
-    console.log("DB initialized successfully");
-
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-    });
-
-  } catch (error) {
-    console.error("SERVER START ERROR:", error);
-  }
-})();
-
 app.use(cors({ origin: process.env.FRONTEND_URL || '*' }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
